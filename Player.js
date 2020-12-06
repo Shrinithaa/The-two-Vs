@@ -4,6 +4,7 @@ class Player {
    this.distanceX = 0;
    this.distanceY=0;
     this.name = null;
+    this.flag=0;
   }
 
   getCount(){
@@ -24,10 +25,12 @@ class Player {
     database.ref(playerIndex).set({
       name:this.name,
      distanceX:this.distanceX,
-     distanceY:this.distanceY
+     distanceY:this.distanceY,
+     flag:this.flag   
     });
   }
 
+  
   static getPlayerInfo(){
     var playerInfoRef = database.ref('players');
     playerInfoRef.on("value",(data)=>{

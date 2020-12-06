@@ -35,6 +35,7 @@ class Game {
     player4 = createSprite(200, 800, 50,50);
     player5 = createSprite(500,400, 50,50);
     player6 = createSprite(567, 863, 50,50);
+  
     players=[player1,player2,player3,player4,player5,player6];
   }
 
@@ -42,7 +43,12 @@ class Game {
     form.hide();
     
     Player.getPlayerInfo();
-
+    if(rand===7)
+    {
+      rand=Math.round(random(1,2));
+      player.flag=1;
+      player.update();
+    }
     if(allPlayers !== undefined){
       //var display_position = 130;
       background(rgb(198,135,103));
@@ -66,55 +72,95 @@ class Game {
         players[index-1].y = y;
        // console.log(index, player.index)
 
-       rand = Math.round(random(1,2));
-
        
-        if (index === player.index){                                     
-          
-          if((index-1)===rand)
+      /* if(player.flag===1)
+       {
+        players[index - 1].shapeColor = "blue";
+       }
+       else 
+       {
+        players[index - 1].shapeColor = "red";
+       }*/
+       console.log(index + " is the index value")
+       console.log(rand + " is the rand value")
+       console.log(player.index + " is the player index value")
+       if(index===rand)
           {
-            players[index-1].visible=false;
-            console.log(players[index-1]+" is the invisible player");
+                       
+            console.log(rand + " is set to be the main player")
+            if(keyIsDown(UP_ARROW) && player.index !== null){
+              player.distanceY +=50;
+              
+            players[index - 1].shapeColor = "blue";
+              
+              player.update();
+            }
+        
+            if(keyIsDown(DOWN_ARROW) && player.index !== null){
+              player.distanceY -=50;
+              players[index - 1].shapeColor = "blue";
+              
+             player.update();
+            }
+        
+            if(keyIsDown(LEFT_ARROW) && player.index !== null){
+              player.distanceX +=50;
+              
+            players[index - 1].shapeColor = "blue";
+              
+              player.update();
+            }
+            
+            if(keyIsDown(RIGHT_ARROW) && player.index !== null){
+              player.distanceX -=50;
+              players[index - 1].shapeColor = "blue";
+              
+             player.update();
+            }
+            camera.position.x = players[index-1].x;
+            camera.position.y = players[index-1].y;
           }
-          else
+          else  if (index!==rand && (index+1) === player.index)
           {
-            stroke(10);
-            fill("red");
-            ellipse(x,y,60,60);
+            console.log((index-1) + " is not the main player")
+            if(keyIsDown(UP_ARROW) && player.index !== null){
+              player.distanceY +=50;              
             players[index - 1].shapeColor = "red";
-          }
-          camera.position.x = players[index-1].x;
-          camera.position.y = players[index-1].y;
+             
+              player.update();
+            }
+        
+            if(keyIsDown(DOWN_ARROW) && player.index !== null){
+              player.distanceY -=50;
+              
+            players[index - 1].shapeColor = "red";
+              
+              player.update();
+            }
+        
+            if(keyIsDown(LEFT_ARROW) && player.index !== null){
+              player.distanceX +=50;
+              
+            players[index - 1].shapeColor = "red";
+              
+              player.update();
+            }
+            
+            if(keyIsDown(RIGHT_ARROW) && player.index !== null){
+              player.distanceX -=50;
+              
+            players[index - 1].shapeColor = "red";
+              
+              player.update();
+            }
+            camera.position.x = players[index-1].x;
+            camera.position.y = players[index-1].y;
+          }                                         
+                        
         }
-       
-        //textSize(15);
-        //text(allPlayers[plr].name + ": " + allPlayers[plr].distance, 120,display_position)
-      }
     }
 
-    if(keyIsDown(UP_ARROW) && player.index !== null){
-      player.distanceY +=50;
-      console.log(player.distanceY);
-      player.update();
-    }
-
-    if(keyIsDown(DOWN_ARROW) && player.index !== null){
-      player.distanceY -=50;
-      console.log(player.distanceY);
-      player.update();
-    }
-
-    if(keyIsDown(LEFT_ARROW) && player.index !== null){
-      player.distanceX +=50;
-      console.log(player.distanceX);
-      player.update();
-    }
     
-    if(keyIsDown(RIGHT_ARROW) && player.index !== null){
-      player.distanceX -=50;
-      console.log(player.distanceX);
-      player.update();
-    }
     drawSprites();
   }
 }

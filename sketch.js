@@ -10,6 +10,7 @@ var players;
 var form, player, game;
 var player1,player2,player3,player4,player5,player6;
 var rand,playername;
+var rand=7;
 
 function setup(){
   canvas = createCanvas(displayWidth - 20, displayHeight-30);
